@@ -1,3 +1,7 @@
+// DOM link to the body of the HTML
+let body = document.querySelector("body");
+
+// Setting up Library array
 const myLibrary = [];
 
 // Constructor function for the books
@@ -63,3 +67,60 @@ function bookDisplay () {
 }
 
 bookDisplay();
+
+let newBookButton = document.createElement("button");
+newBookButton.classList.add("newBook");
+newBookButton.textContent = "Add New Book";
+body.appendChild(newBookButton);
+
+function generateForm () {
+
+    // Decided to make this form in JS rather than HTML for practice...
+    let newBookForm = document.createElement("form");
+    newBookForm.setAttribute("method", "post");
+    newBookForm.setAttribute("action", "submit.php");
+
+    let titleInput = document.createElement("input");
+    titleInput.setAttribute("type", "text");
+    titleInput.setAttribute("id", "title-input");
+    titleInput.setAttribute("name", "book-form");
+    let titleLabel = document.createElement("label");
+    titleLabel.setAttribute("for", "title-input");
+    titleLabel.innerText = "Title";
+
+    let authorInput = document.createElement("input");
+    authorInput.setAttribute("type", "text");
+    authorInput.setAttribute("id", "author-input");
+    authorInput.setAttribute("name", "book-form");
+    let authorLabel = document.createElement("label");
+    authorLabel.setAttribute("for", "author-input");
+    authorLabel.innerText = "Author";
+
+    let noPagesInput = document.createElement("input");
+    noPagesInput.setAttribute("type", "number");
+    noPagesInput.setAttribute("id", "no-pages-input");
+    noPagesInput.setAttribute("name", "book-form");
+    let noPagesLabel = document.createElement("label");
+    noPagesLabel.setAttribute("for", "no-pages-input");
+    noPagesLabel.innerText = "Number of pages";
+
+    let hasReadInput = document.createElement("input");
+    hasReadInput.setAttribute("type", "radio");
+    noPagesInput.setAttribute("id", "has-read-input");
+    noPagesInput.setAttribute("name", "book-form");
+    let hasReadLabel = document.createElement("label");
+    hasReadLabel.setAttribute("for", "has-read-input");
+    hasReadLabel.innerText = "Has read";
+
+    newBookForm.appendChild(titleLabel);
+    newBookForm.appendChild(titleInput);
+    newBookForm.appendChild(authorLabel);
+    newBookForm.appendChild(authorInput);
+    newBookForm.appendChild(noPagesLabel);
+    newBookForm.appendChild(noPagesInput);
+    newBookForm.appendChild(hasReadLabel);
+    newBookForm.appendChild(hasReadInput);
+    body.appendChild(newBookForm);
+}
+
+newBookButton.addEventListener("click", generateForm)

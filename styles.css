@@ -27,3 +27,7 @@ table {
   tr:nth-child(odd) td {
     background-color: rgb(245,245,245);
   }
+
+  .newBook {
+    width: 300px;
+  }

@@ -78,7 +78,7 @@ function generateForm () {
     // Decided to make this form in JS rather than HTML for practice...
     let newBookForm = document.createElement("form");
     newBookForm.setAttribute("method", "post");
-    newBookForm.setAttribute("action", "submit.php");
+    newBookForm.setAttribute("id", "newForm");
 
     let titleInput = document.createElement("input");
     titleInput.setAttribute("type", "text");
@@ -97,7 +97,7 @@ function generateForm () {
     authorLabel.innerText = "Author";
 
     let noPagesInput = document.createElement("input");
-    noPagesInput.setAttribute("type", "number");
+    noPagesInput.setAttribute("type", "text");
     noPagesInput.setAttribute("id", "no-pages-input");
     noPagesInput.setAttribute("name", "book-form");
     let noPagesLabel = document.createElement("label");
@@ -106,11 +106,16 @@ function generateForm () {
 
     let hasReadInput = document.createElement("input");
     hasReadInput.setAttribute("type", "radio");
-    noPagesInput.setAttribute("id", "has-read-input");
-    noPagesInput.setAttribute("name", "book-form");
+    hasReadInput.setAttribute("id", "has-read-input");
+    hasReadInput.setAttribute("name", "book-form");
     let hasReadLabel = document.createElement("label");
     hasReadLabel.setAttribute("for", "has-read-input");
     hasReadLabel.innerText = "Has read";
+
+    let submitButton = document.createElement("button");
+    submitButton.setAttribute("type", "submit");
+    submitButton.setAttribute("id", "submit-button");
+    submitButton.innerText = "Submit";
 
     newBookForm.appendChild(titleLabel);
     newBookForm.appendChild(titleInput);
@@ -120,7 +125,24 @@ function generateForm () {
     newBookForm.appendChild(noPagesInput);
     newBookForm.appendChild(hasReadLabel);
     newBookForm.appendChild(hasReadInput);
+    newBookForm.appendChild(submitButton);
     body.appendChild(newBookForm);
+
+    submitButton.addEventListener("click", storeValues);
 }
 
-newBookButton.addEventListener("click", generateForm)
+// Making the form appear only after you have clicked the button
+newBookButton.addEventListener("click", generateForm);
+
+function storeValues (event) {
+    event.preventDefault();
+    let newTitle = document.getElementById("title-input").value;
+    let newAuthor = document.getElementById("author-input").value;
+    let newNoPages = document.getElementById("no-pages-input").value;
+    let newHasRead = document.getElementById("has-read-input").checked ? "yes" : "no";
+    const newBook = new Book(newTitle, newAuthor, newNoPages, newHasRead);
+    addBookToLibrary(newBook);
+    table.innerHTML = "";
+    newForm.innerHTML = "";
+    bookDisplay();
+}

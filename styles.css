@@ -31,3 +31,10 @@ table {
   .newBook {
     width: 300px;
   }
+
+.remove-button {
+  width: 10px;
+  height: 10px;
+  border-radius: 10%;
+  background-color: red;
+}

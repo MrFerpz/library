@@ -119,6 +119,9 @@ function generateForm () {
     let titleLabel = document.createElement("label");
     titleLabel.setAttribute("for", "title-input");
     titleLabel.innerText = "Title";
+    let titleError = document.createElement("span");
+    titleError.setAttribute("class", "error");
+    titleError.setAttribute("id", "title-error");
 
     let authorInput = document.createElement("input");
     authorInput.setAttribute("type", "text");
@@ -127,6 +130,9 @@ function generateForm () {
     let authorLabel = document.createElement("label");
     authorLabel.setAttribute("for", "author-input");
     authorLabel.innerText = "Author";
+    let authorError = document.createElement("span");
+    authorError.setAttribute("class", "error");
+    authorError.setAttribute("id", "author-error");
 
     let noPagesInput = document.createElement("input");
     noPagesInput.setAttribute("type", "text");
@@ -135,6 +141,9 @@ function generateForm () {
     let noPagesLabel = document.createElement("label");
     noPagesLabel.setAttribute("for", "no-pages-input");
     noPagesLabel.innerText = "Number of pages";
+    let pageError = document.createElement("span");
+    pageError.setAttribute("class", "error");
+    pageError.setAttribute("id", "page-error");
 
     let hasReadInput = document.createElement("input");
     hasReadInput.setAttribute("type", "radio");
@@ -152,10 +161,13 @@ function generateForm () {
     // Adding them all to the form
     newBookForm.appendChild(titleLabel);
     newBookForm.appendChild(titleInput);
+    newBookForm.appendChild(titleError);
     newBookForm.appendChild(authorLabel);
     newBookForm.appendChild(authorInput);
+    newBookForm.appendChild(authorError);
     newBookForm.appendChild(noPagesLabel);
     newBookForm.appendChild(noPagesInput);
+    newBookForm.appendChild(pageError);
     newBookForm.appendChild(hasReadLabel);
     newBookForm.appendChild(hasReadInput);
     newBookForm.appendChild(submitButton);

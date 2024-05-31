@@ -120,8 +120,7 @@ function generateForm () {
     titleLabel.setAttribute("for", "title-input");
     titleLabel.innerText = "Title";
     let titleError = document.createElement("span");
-    titleError.setAttribute("class", "error");
-    titleError.setAttribute("id", "title-error");
+    titleError.setAttribute("style", "color: red");
 
     let authorInput = document.createElement("input");
     authorInput.setAttribute("type", "text");
@@ -131,8 +130,7 @@ function generateForm () {
     authorLabel.setAttribute("for", "author-input");
     authorLabel.innerText = "Author";
     let authorError = document.createElement("span");
-    authorError.setAttribute("class", "error");
-    authorError.setAttribute("id", "author-error");
+    authorError.setAttribute("style", "color: red");
 
     let noPagesInput = document.createElement("input");
     noPagesInput.setAttribute("type", "text");
@@ -142,8 +140,7 @@ function generateForm () {
     noPagesLabel.setAttribute("for", "no-pages-input");
     noPagesLabel.innerText = "Number of pages";
     let pageError = document.createElement("span");
-    pageError.setAttribute("class", "error");
-    pageError.setAttribute("id", "page-error");
+    pageError.setAttribute("style", "color: red");
 
     let hasReadInput = document.createElement("input");
     hasReadInput.setAttribute("type", "radio");
@@ -173,7 +170,48 @@ function generateForm () {
     newBookForm.appendChild(submitButton);
     body.appendChild(newBookForm);
 
-    submitButton.addEventListener("click", storeValues);
+    // Listen for constraints 
+    titleInput.addEventListener("input", () => {
+        const isValid = titleInput.value.length >= 3 && titleInput.value.length <= 30;
+        if (isValid) {
+            titleError.textContent = ""
+        } else {
+            titleError.textContent = " Title must be between 3 and 30 characters. ";
+        }
+    })
+
+    authorInput.addEventListener("input", () => {
+        const isValid = authorInput.value.length >= 3 && authorInput.value.length <= 30;
+        if (isValid) {
+            authorError.textContent = ""
+        } else {
+            authorError.textContent = " Author must be between 3 and 30 characters. ";
+        }
+    })
+
+    noPagesInput.addEventListener("input", () => {
+        const isValid = noPagesInput.value >= 3 && noPagesInput.value <= 1000;
+        if (isValid) {
+            pageError.textContent = ""
+        } else {
+            pageError.textContent = " Book length must be between 3 and 1000 pages. ";
+        }
+    })
+
+    newBookForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        let errorChecker = true;
+
+        if (titleError.textContent !== "" || authorInput.textContent !== "" || pageError.textContent !== "") {
+            errorChecker = false;
+        }
+
+        if (errorChecker) {
+            storeValues(event);
+        } else {
+            alert("Go check your form lad");
+        }
+    })
 }
 
 function storeValues (event) {
